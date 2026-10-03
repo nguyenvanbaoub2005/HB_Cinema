@@ -1,0 +1,121 @@
+.seat-container-admin {
+  width: 100%;
+  max-width: 1280px; /* container */
+  max-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px; /* px-4 */
+  padding-right: 16px; /* px-4 */
+  padding-top: 32px; /* py-8 */
+  padding-bottom: 32px; /* py-8 */
+}
+
+.seats-grid-admin {
+  padding: 5px 5px;
+  width: 100%;
+  max-width: 768px; /* max-w-3xl */
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* grid-cols-10 */
+  gap: 8px; /* gap-2 */
+  overflow-x: auto;
+  scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+  -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+}
+.seats-grid-admin::-webkit-scrollbar {
+  display: none; /* Ẩn thanh cuộn cho Chrome/Safari */
+}
+
+/* Ghế cơ bản */
+.seat-button-admin {
+  height: 50px; /* h-14 */
+  position: relative;
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500; /* font-medium */
+  transition: transform 0.2s ease-in-out; /* transition-all duration-200 */
+}
+
+.seat-button-admin:hover {
+  transform: scale(1.05); /* hover:scale-105 */
+}
+
+.seat-button-admin:disabled {
+  cursor: not-allowed; /* disabled:cursor-not-allowed */
+}
+
+.seat-button-admin:disabled:hover {
+  transform: scale(1); /* disabled:hover:scale-100 */
+}
+/* Ghế đơn */
+.seat-single-admin {
+  aspect-ratio: 1 / 1; /* aspect-square */
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Ghế đôi */
+.seat-couple-admin {
+  aspect-ratio: 2 / 1; /* aspect-[2/1] */
+  border-radius: 0.5rem; /* rounded-lg */
+  grid-column: span 2; /* col-span-2 */
+}
+/* Tên và giá ghế */
+.seat-name-admin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.seat-price-admin {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 8px; /* text-[8px] */
+}
+
+
+/* Legend */
+.seat-legend-admin {
+  width: 100%;
+  max-width: 768px; /* max-w-3xl */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px; /* mt-8 */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* gap-4 */
+  justify-content: center;
+}
+
+.legend-item-admin {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* gap-2 */
+}
+
+.legend-color-admin {
+  width: 16px; /* w-4 */
+  height: 16px; /* h-4 */
+  border-radius: 0.5rem; /* rounded */
+}
+/* Màu sắc ghế */
+.seat-standard-admin {
+  background-color: #10b981; /* bg-green-500 */
+  color: white;
+}
+
+.seat-vip-admin {
+  background-color: #fb923c; /* bg-orange-400 */
+  color: white;
+}
+
+.seat-couple-admin {
+  background-color: #f472b6; /* bg-pink-400 */
+  color: white;
+}
+
+.seat-booked-admin {
+  background-color: #6b7280; /* bg-gray-500 */
+  color: #d1d5db; /* text-gray-300 */
+}

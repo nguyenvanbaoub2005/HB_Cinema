@@ -1,0 +1,101 @@
+/* Styles for auth (login & sign-up) */
+
+/* General container for auth pages */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../assets/images/bg_login.png') no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Card layout for auth forms */
+.auth-card {
+    background-color: #26313c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    width: 24rem;
+}
+
+/* Input field styles */
+.auth-input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #4a5568;
+    background-color: #303642;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.auth-input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.5);
+}
+
+/* Submit button styles */
+.auth-button {
+    width: 100%;
+    background-color: #f97316;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #ea580c;
+}
+
+/* Social media button styles */
+.auth-social-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.auth-google-button {
+    background-color: #1877f2;
+}
+
+.auth-facebook-button {
+    background-color: #1877f2;
+}
+
+/* Logo container */
+.auth-logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.auth-logo {
+    width: 150px;
+    height: 40px;
+}
+
+/* Additional utility styles for error and success messages */
+.auth-error {
+    color: #f87171;
+    font-size: 0.875rem;
+}
+
+.auth-success {
+    color: #4ade80;
+    font-size: 0.875rem;
+}
+
+.auth-divider {
+    margin: 1.5rem 0;
+    text-align: center;
+    color: #9ca3af;
+}

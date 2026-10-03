@@ -1,0 +1,89 @@
+/* Overlay Styles */
+.profile-overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  /* Container Styles */
+  .profile-container {
+    background-color: rgb(240, 240, 240);
+    border-radius: 8px;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    margin: 20px;
+    width: 100%;
+    max-width: 680px;
+  }
+  
+  /* Header Styles */
+  .profile-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  /* Input Styles */
+  .profile-input {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    color: #2c2c2c;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  
+  .profile-input-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .profile-input-full {
+    grid-column: span 2;
+  }
+  
+  /* Button Container */
+  .profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    gap: 8px;
+  }
+  
+  /* Button Styles */
+  .profile-button {
+    padding: 8px 40px;
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+    font-size: 14px;
+  }
+  
+  .profile-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .profile-button-cancel {
+    background-color: #fff;
+    color: #3d8ae2;
+    font-weight: 600;
+    border: 2px solid #3d8ae2;
+  }
+  
+  .profile-button-save {
+    background-color: #fff;
+    color: #16a34a;
+    font-weight: 600;
+    border: 2px solid #16a34a;
+  }
+  
+  

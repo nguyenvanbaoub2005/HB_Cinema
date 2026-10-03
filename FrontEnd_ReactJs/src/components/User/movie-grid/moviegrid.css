@@ -1,0 +1,137 @@
+/* Tổng thể danh sách */
+.movie-grid {
+    padding: 20px 10%;
+    background-color: #fffaf5; /* Nền sáng cam nhạt */
+    color: #4a4a4a; /* Chữ màu xám đậm */
+    border-radius: 8px;
+  }
+  
+  .movie-grid-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff6f3d; /* Màu cam chủ đạo */
+    margin-bottom: 25px;
+    letter-spacing: 1.5px;
+  }
+  
+  /* Grid Layout */
+  .movie-grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tự động tạo cột cho màn hình lớn, 1 cột cho màn hình nhỏ */
+    gap: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Card phim */
+  .movie-grid-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    position: relative;
+  }
+  
+  /* Ảnh phim */
+  .movie-grid-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: #ffe5d1; /* Nền cam rất nhạt nếu ảnh chưa tải */
+  }
+  
+  /* Thông tin phim */
+  .movie-grid-info {
+    padding: 15px;
+    flex-grow: 1;
+  }
+  
+  .movie-grid-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6f3d;
+    margin-bottom: 10px;
+  }
+  
+  .movie-grid-duration {
+    color: #e04d2f; /* Cam hơi đỏ */
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .movie-grid-overview {
+    font-size: 14px;
+    color: #7a7a7a; /* Xám trung tính */
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  /* Rating */
+  .movie-grid-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff6f3d; /* Cam chủ đạo */
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+  }
+  
+  /* Pagination */
+  .movie-grid-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .movie-grid-page-button {
+    padding: 6px 12px;
+    border: 1px solid #f5c6a5;
+    background: #fff5eb; /* Nền cam nhạt */
+    color: #e67e22;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .movie-grid-page-button:hover {
+    background: #f39c12; /* Cam sáng khi hover */
+    color: #ffffff; /* Chữ trắng khi hover */
+  }
+  
+  .movie-grid-page-button.active {
+    background: #ff6f3d; /* Cam chủ đạo cho trang hiện tại */
+    color: #ffffff;
+    border: none;
+  }
+  
+  .movie-grid-page-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #f5c6a5; /* Cam nhạt khi bị vô hiệu */
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .movie-grid-list {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Điều chỉnh số cột trên màn hình nhỏ */
+    }
+  
+    .movie-grid-image {
+      height: 200px; /* Giảm kích thước ảnh trên màn hình nhỏ */
+    }
+  
+    .movie-grid-title {
+      font-size: 18px; /* Giảm kích thước chữ tiêu đề */
+    }
+  
+    .movie-grid-overview {
+      font-size: 12px; /* Giảm kích thước chữ mô tả */
+    }
+  }
+  

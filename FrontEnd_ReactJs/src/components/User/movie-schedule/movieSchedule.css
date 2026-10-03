@@ -1,0 +1,102 @@
+.movie-schedule-container {
+    padding: 70px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border-radius: 8px;
+    
+  }
+  
+  .selection-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 40px; 
+  }
+  /* Ẩn thanh cuộn cho Chrome, Safari */
+  .selection-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .selection-button {
+    padding: 10px 15px;
+    border: 2px solid #fc6e43;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #fc6e43;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  }
+  
+  .selection-button.selected {
+    position: relative;
+    border: 2px solid #fa812f;
+    border-radius: 4px;
+    background-color: #fa812f;
+    color: #fff;
+  }
+  .selection-button:hover {
+    border: 2px solid #fa812f;
+  }
+  
+  .date-button {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    font-weight: 500;
+  }
+  
+  .branch-button {
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .branch-button img {
+    max-width: 70px;
+  }
+  
+  .room-button {
+    width: 85px;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .showtime-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+  }
+  
+  .showtime-button {
+    padding: 5px;
+    width: 90px;
+    border: 2px solid #108ab1;
+    background-color: #fff;
+    color: #108ab1;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .showtime-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+  }
+  
+  @media (max-width: 768px) {
+  
+  }

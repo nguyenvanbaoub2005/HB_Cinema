@@ -1,0 +1,179 @@
+/* Tổng thể danh sách */
+.top-movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10%; /* Padding hai bên (10% mỗi bên) */
+    background-color: #fcf9f3; /* Nền sáng với tông cam nhạt */
+    color: #4a4a4a; /* Chữ màu xám đậm */
+    border-radius: 8px;
+  }
+  
+  /* Tiêu đề Top Rating */
+  .top-movie-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e85c17; /* Cam đậm hơn */
+    margin-bottom: 20px;
+    letter-spacing: 1.5px; /* Khoảng cách giữa các chữ cái */
+  }
+  
+  /* Card phim */
+  .top-movie-card {
+    position: relative; /* Để định vị rating ở góc phải */
+    display: flex;
+    flex-wrap: wrap; /* Cho phép nội dung co giãn theo kích thước màn hình */
+    border: 1px solid #fac09e; /* Viền cam nhạt */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff; /* Nền trắng cho mỗi card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  }
+  
+  .top-movie-image {
+    width: 150px;
+    height: 220px;
+    object-fit: cover;
+    flex-shrink: 0; /* Đảm bảo hình ảnh không bị thu nhỏ */
+  }
+  
+  /* Thông tin phim */
+  .top-movie-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; /* Để nội dung chiếm không gian còn lại */
+  }
+  
+  .top-movie-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e85c17; /* Cam đậm */
+    margin-bottom: 10px;
+  }
+  
+  .top-movie-duration {
+    color: #d45a00; /* Cam đậm hơn */
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .top-movie-overview {
+    font-size: 14px;
+    color: #7d7d7d; /* Xám trung tính */
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  /* Nút Watch Trailer */
+  .top-movie-trailer {
+    display: inline-block;
+    background-color: #ffffff; /* Nền trắng */
+    color: #e85c17; /* Cam đậm */
+    border: 2px solid #e85c17; /* Viền cam đậm */
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    align-self: flex-start; /* Căn trái */
+  }
+  
+  .top-movie-trailer:hover {
+    background-color: #e85c17; /* Nền cam đậm khi hover */
+    color: #ffffff; /* Chữ trắng khi hover */
+  }
+  
+  /* Rating */
+  .top-movie-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff6b3d; /* Cam đậm hơn */
+    color: #ffffff; /* Chữ trắng */
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+  }
+  
+  /* Pagination */
+  .top-movie-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .top-movie-page-button {
+    padding: 6px 12px;
+    border: 1px solid #fac09e;
+    background: #ffe8d8; /* Nền cam nhạt */
+    color: #e85c17; /* Cam đậm */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .top-movie-page-button:hover {
+    background: #e85c17; /* Cam sáng khi hover */
+    color: #ffffff; /* Chữ trắng khi hover */
+  }
+  
+  .top-movie-page-button.top-movie-page-active {
+    background: #e85c17; /* Cam chủ đạo cho trang hiện tại */
+    color: #ffffff; /* Chữ trắng */
+    border: none;
+  }
+  
+  .top-movie-page-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #fac09e; /* Cam nhạt khi bị vô hiệu */
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .top-movie-card {
+      flex-direction: column; /* Thẻ phim chuyển thành dạng cột trên màn hình nhỏ */
+      align-items: center; /* Căn giữa nội dung */
+    }
+  
+    .top-movie-info {
+      text-align: center; /* Căn giữa nội dung mô tả */
+    }
+  
+    .top-movie-image {
+      width: 100%; /* Ảnh chiếm toàn bộ chiều rộng */
+      height: auto; /* Tự điều chỉnh chiều cao theo tỉ lệ */
+    }
+  
+    .top-movie-trailer {
+      align-self: center; /* Nút căn giữa */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .top-movie-list {
+      padding: 10px; /* Giảm padding cho màn hình nhỏ */
+    }
+  
+    .top-movie-title {
+      font-size: 18px; /* Giảm kích thước chữ tiêu đề */
+    }
+  
+    .top-movie-overview {
+      font-size: 12px; /* Giảm kích thước chữ mô tả */
+    }
+  
+    .top-movie-trailer {
+      font-size: 12px; /* Nút nhỏ hơn */
+      padding: 8px 16px; /* Giảm padding của nút */
+    }
+  }
+  

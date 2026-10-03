@@ -1,0 +1,166 @@
+/* Bill Container */
+.bill-container {
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: 20px;
+  margin-top: 50px;
+  background-color: rgb(240, 240, 240);
+  border-radius: 8px;
+  max-height: calc(4 * 125px + 45px); /* Hiển thị tối đa 3 bill */
+  overflow-y: auto; /* Thêm thanh cuộn khi vượt quá chiều cao */
+}
+
+/* Thanh cuộn tuỳ chỉnh */
+.bill-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bill-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.bill-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Bill Receipt */
+.bill-receipt {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 10px;
+  max-width: 64rem;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.bill-receipt:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Bill Title */
+.bill-title {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Receipt ID */
+.bill-receipt-id {
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.bill-receipt-id-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.bill-receipt-id-number {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #5c5753;
+}
+
+/* Theater Info */
+.bill-theater-info {
+  margin-right: 1.5rem;
+  flex-grow: 1;
+}
+
+.bill-theater-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.bill-theater-name {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fa931d;
+  letter-spacing: 0.05em;
+}
+
+/* Date and Time */
+.bill-date-time-info {
+  margin-right: 1.5rem;
+}
+
+.bill-date-time-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.bill-date-column,
+.bill-time-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.bill-date-time-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.bill-date-time-value {
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+/* Payment Status */
+.bill-payment-status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.bill-paid-status {
+  display: flex;
+  align-items: center;
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.bill-paid-icon {
+  margin-right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bill-container {
+    padding-top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .bill-receipt {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .bill-receipt-id,
+  .bill-theater-info,
+  .bill-date-time-info {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .bill-date-time-container {
+    justify-content: center;
+  }
+
+  .bill-payment-status {
+    margin-left: 0;
+    justify-content: center;
+  }
+}

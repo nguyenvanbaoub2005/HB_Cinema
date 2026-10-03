@@ -1,0 +1,84 @@
+/* Tổng quan bố cục */
+.news-layout {
+    background: #1a1a1a url('https://via.placeholder.com/1600x400') no-repeat center/cover;
+    padding: 40px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .news-title {
+    text-align: center;
+    font-size: 2rem;
+    color: orange;
+    margin-bottom: 30px;
+  }
+  
+  .news-container {
+    display: grid;
+    grid-template-areas:
+      "large large small"
+      "large large small"
+      "small small small";
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  /* Các mục tin tức */
+  .news-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .news-item.large {
+    grid-area: large;
+  }
+  
+  .news-item.small {
+    grid-area: small;
+  }
+  
+  .news-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .news-content {
+    padding: 15px;
+  }
+  
+  .news-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .news-content p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    color: #666;
+  }
+  
+  /* Nút "Read More" */
+  .news-button {
+    display: inline-block;
+    background: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .news-button:hover {
+    background: #e67e22;
+  }
+  

@@ -1,0 +1,108 @@
+/* Container chính của vé */
+.ticket-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #f77e21; /* Viền cam nổi bật */
+    padding: 20px; /* Khoảng cách trong */
+    background-color: #fff8ef; /* Màu nền nhẹ */
+    max-width: 1000px; /* Giới hạn chiều rộng */
+    margin: 20px auto; /* Căn giữa */
+    border-radius: 12px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Ẩn nội dung tràn */
+    flex-wrap: wrap; /* Cho phép co giãn layout */
+  }
+  
+  /* Phần bên trái: Thông tin vé */
+  .ticket-left {
+    padding-right: 20px; /* Khoảng cách với QR */
+  }
+  
+  .movie-ticket-title {
+    padding-bottom: 10px;
+    font-size: 20px; /* Chữ lớn hơn */
+    color: #f77e21; /* Màu cam nổi bật */
+    margin: 0 auto;
+    text-align: center;
+
+   
+  }
+  
+  .movie-ticket-info {
+    font-size: 15px; /* Chữ rõ hơn một chút */
+    color: #444; /* Màu chữ tối để dễ đọc */
+    margin: 6px 0;
+    line-height: 1.5; /* Giãn dòng */
+  }
+  
+  /* Phần bên phải: QR Code */
+  .ticket-right {
+    width: 30%; /* Chiếm ít không gian hơn */
+    text-align: center;
+  }
+  
+  .qr-code {
+    width: 120px; /* Kích thước QR */
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 10px; /* Bo góc QR */
+    background-color: #fff; /* Nền trắng */
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* Hiệu ứng nổi nhẹ */
+  }
+  
+  /* Phần danh sách vé */
+  .ticket-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Khoảng cách giữa các vé */
+  }
+  
+  /* Media Query: Máy tính bảng */
+  @media (max-width: 768px) {
+    .ticket-container {
+      flex-direction: column; /* Layout dọc */
+      padding: 16px;
+    }
+  
+    .ticket-left {
+      width: 100%; /* Chiếm toàn bộ không gian */
+      padding-right: 0;
+      margin-bottom: 12px; /* Tạo khoảng cách với phần QR */
+      text-align: center; /* Căn giữa nội dung */
+    }
+  
+    .ticket-right {
+      width: 100%;
+    }
+  
+    .qr-code {
+      width: 100px; /* QR nhỏ hơn */
+      height: 100px;
+    }
+  }
+  
+  /* Media Query: Điện thoại */
+  @media (max-width: 480px) {
+    .ticket-container {
+      padding: 12px;
+      border-radius: 10px;
+    }
+  
+    .movie-ticket-title {
+      font-size: 18px; /* Chữ nhỏ hơn */
+    }
+  
+    .movie-ticket-info {
+      font-size: 14px;
+    }
+  
+    .qr-code {
+      width: 80px; /* QR nhỏ hơn cho điện thoại */
+      height: 80px;
+    }
+  }
+  

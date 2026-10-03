@@ -1,0 +1,194 @@
+/* Container styles */
+.movie-container {
+  background-color: #f3f4f6;
+  padding: 2rem 4rem;
+  min-height: 100vh;
+}
+
+/* Header styles */
+.movie-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .movie-header {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.add-button-container {
+  padding: 10px;
+}
+
+.add-movie-button {
+  background-color: #108ab1;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.add-movie-button:hover {
+  background-color: #45a049;
+}
+
+/* Table container styles */
+.movie-table-container {
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+/* Scrollbar styles */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Table styles */
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.movie-table th,
+.movie-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.movie-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.movie-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Image thumbnail */
+.movie-thumbnail {
+  width: 40px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.edit-button,
+.delete-button,
+.schedule-button {
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  width: 32px;
+  height: 32px;
+}
+
+.edit-button {
+  background-color: #108ab1;
+  /* bg-teal-400 */
+  ;
+}
+
+.delete-button {
+  background-color: #dc2626;
+  /* bg-pink-400 */
+  ;
+}
+
+.edit-button:hover {
+  background-color: #16a34a;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+}
+
+.schedule-button {
+  background-color: #e6c831;
+}
+
+.schedule-button:hover {
+  background-color: #c0a82e;
+}
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+  .movie-table {
+    font-size: 14px;
+  }
+
+  .movie-table th,
+  .movie-table td {
+    padding: 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .movie-thumbnail {
+    width: 32px;
+    height: 45px;
+  }
+}
+
+/* Modal animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.add-movie-modal,
+.edit-movie-modal,
+.delete-movie-modal {
+  animation: fadeIn 0.3s ease;
+}

@@ -1,0 +1,95 @@
+
+.admin-bill-container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 1.5rem auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-bill-header {
+  padding: 1.5rem;
+}
+
+.admin-bill-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.admin-bill-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-bill-filter .filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-bill-filter .filter-item input {
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  width: 10rem;
+  transition: border-color 0.2s;
+}
+
+.admin-bill-filter .filter-item input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.admin-bill-filter .export-button {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.admin-bill-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-bill-table th,
+.admin-bill-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.admin-bill-table th {
+  background-color: #f3f4f6;
+  font-weight: bold;
+}
+
+.admin-bill-table tr:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+.admin-bill-table .operation-button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  color: #3b82f6;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .admin-bill-filter {
+    flex-direction: column;
+  }
+
+  .admin-bill-filter .filter-item input {
+    width: 100%;
+  }
+}

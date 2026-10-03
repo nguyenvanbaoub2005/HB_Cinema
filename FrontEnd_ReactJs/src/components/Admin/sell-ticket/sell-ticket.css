@@ -1,0 +1,172 @@
+.sell-movie-schedule-container {
+    max-width: 1300px;
+    padding: 70px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border-radius: 8px;
+    
+  }
+
+  .sell-title {
+    padding-bottom: 20px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #003b7a;
+  }
+  .sell-movie-selection-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    white-space: nowrap; /* Ngăn xuống dòng để cuộn ngang */
+    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 40px;
+  }
+  
+  .sell-movie-selection-row::-webkit-scrollbar {
+    display: none; /* Ẩn thanh cuộn cho Chrome/Safari */
+  }
+  
+  .sell-movie-card {
+    position: relative;
+    flex-shrink: 0; /* Ngăn các thẻ bị co lại khi cuộn */
+    width: 130px; /* Chiều rộng cố định */
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sell-movie-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .sell-movie-card.selected {
+    border: 3px solid #007bff;
+  }
+  
+  .sell-movie-poster {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .sell-movie-info {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .sell-movie-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .sell-movie-duration {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+  
+  .sell-selection-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px; 
+  }
+  /* Ẩn thanh cuộn cho Chrome, Safari */
+  .sell-selection-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sell-selection-button {
+    padding: 10px 15px;
+    border: 2px solid #fc6e43;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #fc6e43;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  }
+  
+  .sell-selection-button.selected {
+    position: relative;
+    border: 2px solid #fa812f;
+    border-radius: 4px;
+    background-color: #fa812f;
+    color: #fff;
+  }
+  .sell-selection-button:hover {
+    border: 2px solid #fa812f;
+  }
+  
+  .sell-date-button {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    font-weight: 500;
+  }
+  
+  .sell-branch-button {
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .sell-branch-button img {
+    max-width: 70px;
+  }
+  
+  .sell-room-button {
+    width: 85px;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .sell-showtime-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+  }
+  
+  .sell-showtime-button {
+    padding: 5px;
+    width: 90px;
+    border: 2px solid #108ab1;
+    background-color: #fff;
+    color: #108ab1;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .sell-showtime-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+  }
+  

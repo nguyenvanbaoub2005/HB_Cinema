@@ -1,0 +1,159 @@
+.bill-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.bill-modal {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bill-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+}
+
+
+.bill-modal-header h2 {
+  margin: 0;
+  color: #043870;
+  font-size: 24px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #1a1a1a;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h3 {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.item-name {
+  color: #1a1a1a;
+  font-size: 16px;
+}
+
+.item-price {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.total-section {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.total-price {
+  color: #e53e3e;
+}
+
+.bill-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancel-button {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+.pay-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #2287f3;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pay-button:hover {
+  background-color: #406cb7;
+}
+
+.arrow-icon {
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .bill-modal {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .bill-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .item-name,
+  .item-price {
+    font-size: 14px;
+  }
+
+  .cancel-button,
+  .pay-button {
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+}

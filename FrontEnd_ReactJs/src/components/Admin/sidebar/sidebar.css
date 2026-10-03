@@ -1,0 +1,145 @@
+/* Sidebar Container */
+.sidebar-container {
+  background-color: #fb923c;
+  /* bg-orange-400 */
+  ;
+  /* bg-gray-900 */
+  color: white;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+/* Logo Section */
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.sidebar-logo img {
+  width: 120px;
+  height: auto;
+}
+
+/* Profile Section */
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.profile-icon {
+  height: 40px;
+  width: 40px;
+  color: white;
+  margin-right: 12px;
+}
+
+.profile-text h2 {
+  font-size: 1.25rem;
+  /* text-lg */
+  font-weight: 600;
+  /* font-semibold */
+}
+
+.profile-text p {
+  font-size: 0.875rem;
+  /* text-sm */
+  color: #a0aec0;
+  /* text-gray-400 */
+}
+
+.logout-button {
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #4a5568;
+  /* bg-gray-700 */
+}
+
+/* Search Box */
+.search-box {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #2d3748;
+  /* bg-gray-800 */
+  color: white;
+  outline: none;
+  border: none;
+}
+
+.search-input::placeholder {
+  color: #a0aec0;
+  /* text-gray-500 */
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  color: #a0aec0;
+  /* text-gray-500 */
+}
+
+/* Menu Items */
+.menu-items {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menu Item */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease;
+  margin-left: 0;
+  /* Đảm bảo không có khoảng cách bên trái */
+}
+
+.menu-item:hover {
+  background-color: #4a5568;
+  /* bg-gray-700 */
+}
+
+.menu-item.active {
+  background-color: #4a5568;
+  /* bg-gray-700 */
+}
+
+.menu-item-icon {
+  height: 24px;
+  width: 24px;
+  color: white;
+}
+
+.menu-item-text {
+  margin-left: 12px;
+  /* Khoảng cách giữa icon và text */
+  font-size: 1rem;
+}

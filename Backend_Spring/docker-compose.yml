@@ -1,0 +1,61 @@
+services:
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: hb_cinema_db
+    ports:
+      - "3306:3306"
+    command: --bind-address=0.0.0.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - cinema_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    networks:
+      - cinema_net
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+
+  hb_cinema:
+    build:
+      context: .
+    container_name: Backend_Spring
+    ports:
+      - "9091:8081"
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - cinema_net
+    environment:
+      DB_URL: jdbc:mysql://mysql_db:3306/hb_cinema_db
+      DB_USERNAME: ${DB_USERNAME:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-root}
+      JWT_SIGNER_KEY: ${JWT_SIGNER_KEY}
+      VNPAY_TMN_CODE: ${VNPAY_TMN_CODE:-58X4B4HP}
+      VNPAY_SECRET_KEY: ${VNPAY_SECRET_KEY}
+      VNPAY_RETURN_URL: ${VNPAY_RETURN_URL:-http://localhost:3000/identity/payment/vn-pay-callback}
+      TZ: Asia/Ho_Chi_Minh
+
+networks:
+  cinema_net:
+    driver: bridge
+
+volumes:
+  mysql_data:
