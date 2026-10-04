@@ -33,8 +33,7 @@ services:
         condition: service_healthy
 
   hb_cinema:
-    build:
-      context: .
+    image: booooo226a/hb_cinema_backend:latest
     container_name: Backend_Spring
     ports:
       - "9091:8081"
