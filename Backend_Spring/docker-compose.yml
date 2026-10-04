@@ -44,7 +44,7 @@ services:
     networks:
       - cinema_net
     environment:
-      DB_URL: jdbc:mysql://mysql_db:3306/hb_cinema_db
+      DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME:-root}
       DB_PASSWORD: ${DB_PASSWORD:-root}
       JWT_SIGNER_KEY: ${JWT_SIGNER_KEY}

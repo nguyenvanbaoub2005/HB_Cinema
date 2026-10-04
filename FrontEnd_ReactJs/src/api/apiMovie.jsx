@@ -1,57 +1,60 @@
 import { request, requestPrivate } from "./request";
+import { withCache, invalidateCache } from "./cache";
 
-// Lấy danh dách tất cả phim
+const CACHE_KEYS = {
+  ALL_MOVIES: "movies:all",
+  MOVIE_BY_ID: (id) => `movies:${id}`,
+};
+
+// Lấy danh sách tất cả phim - cache 2 phút
 export const getAllMovie = async () => {
-  try {
+  return withCache(CACHE_KEYS.ALL_MOVIES, async () => {
     const response = await request.get("/movies");
     return response.data;
-  } catch (error) {
-    console.error("API Error:", error.response?.data || error.message);
-    throw new Error(error.response?.data?.message || "Failed to get all movie");
-  }
+  }, 2 * 60 * 1000); // 2 phút
 };
 
-// Lấy thông tin chi tiết phim
+// Lấy thông tin chi tiết phim - cache 5 phút
 export const getMovieById = async (id) => {
-  try {
-    const reponse = await request.get(`/movies/${id}`);
-    return reponse.data;
-  } catch (error) {
-    console.error("API Error:", error.response?.data || error.message);
-    throw new Error(
-      error.response?.data?.message || "Failed to get details movie"
-    );
-  }
+  return withCache(CACHE_KEYS.MOVIE_BY_ID(id), async () => {
+    const response = await request.get(`/movies/${id}`);
+    return response.data;
+  }, 5 * 60 * 1000); // 5 phút
 };
 
-// Thêm phim mới
+// Thêm phim mới - xóa cache sau khi thêm
 export const addMovie = async (movie) => {
   try {
-    const reponse = await requestPrivate.post("/movies", movie);
-    return reponse.data;
+    const response = await requestPrivate.post("/movies", movie);
+    invalidateCache(CACHE_KEYS.ALL_MOVIES);
+    return response.data;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
     throw new Error(error.response?.data?.message || "Failed to add movie");
   }
 };
 
-// Cập nhật thông tin phim
+// Cập nhật thông tin phim - xóa cache sau khi sửa
 export const updateMovie = async (id, movie) => {
   try {
-    const reponse = await requestPrivate.put(`/movies/${id}`, movie);
-    return reponse.data;
+    const response = await requestPrivate.put(`/movies/${id}`, movie);
+    invalidateCache(CACHE_KEYS.ALL_MOVIES);
+    invalidateCache(CACHE_KEYS.MOVIE_BY_ID(id));
+    return response.data;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
     throw new Error(error.response?.data?.message || "Failed to update movie");
   }
-}
+};
 
-// Xoá phim
-export const deleteMovie =async (id) => {
+// Xóa phim - xóa cache sau khi xóa
+export const deleteMovie = async (id) => {
   try {
     await requestPrivate.delete(`/movies/${id}`);
+    invalidateCache(CACHE_KEYS.ALL_MOVIES);
+    invalidateCache(CACHE_KEYS.MOVIE_BY_ID(id));
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
     throw new Error(error.response?.data?.message || "Failed to delete movie");
   }
-}
+};
