@@ -13,7 +13,7 @@ services:
       JWT_SIGNER_KEY: ${JWT_SIGNER_KEY}
       VNPAY_TMN_CODE: ${VNPAY_TMN_CODE:-58X4B4HP}
       VNPAY_SECRET_KEY: ${VNPAY_SECRET_KEY}
-      VNPAY_RETURN_URL: ${VNPAY_RETURN_URL:-http://localhost:3000/identity/payment/vn-pay-callback}
+      VNPAY_RETURN_URL: ${VNPAY_RETURN_URL:-https://c37f5852.hb-cinema-web.pages.dev/identity/payment/vn-pay-callback}
       TZ: Asia/Ho_Chi_Minh
 
 networks:
