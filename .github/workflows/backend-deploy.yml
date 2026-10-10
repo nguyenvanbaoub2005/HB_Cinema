@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'Backend_Spring/**' # Chỉ chạy khi có thay đổi trong thư mục Backend
+  workflow_dispatch: # Cho phép bấm chạy thủ công trên web Github
 
 jobs:
   build-and-deploy:
