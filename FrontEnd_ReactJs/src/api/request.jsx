@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken } from "./localStorage";
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8081/identity";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://api.fil.id.vn/identity";
 
 export const request = axios.create({
   baseURL: BASE_URL,

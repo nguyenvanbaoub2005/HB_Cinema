@@ -17,7 +17,7 @@ const Room = () => {
         const fetchRooms = async () => {
             try {
                 const token = getToken(); // Lấy JWT từ localStorage
-                const response = await fetch(`http://localhost:8081/identity/rooms/branch/${id}`, {
+                const response = await fetch(`https://api.fil.id.vn/identity/rooms/branch/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
