@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hb-cinema-backend
+  labels:
+    app: hb-cinema-backend
+spec:
+  replicas: 2 # Chạy 2 bản sao để đảm bảo chịu tải tốt (High Availability)
+  selector:
+    matchLabels:
+      app: hb-cinema-backend
+  template:
+    metadata:
+      labels:
+        app: hb-cinema-backend
+    spec:
+      containers:
+        - name: hb-cinema-backend
+          image: booooo226a/hb_cinema_backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: hb-cinema-config
+            - secretRef:
+                name: hb-cinema-secrets
+          # GIỚI HẠN TÀI NGUYÊN (CPU & MEMORY) - Điểm cộng cực lớn khi báo cáo
+          resources:
+            requests:
+              memory: "256Mi" # Mức RAM tối thiểu để chạy
+              cpu: "250m"     # Mức CPU tối thiểu (25% của 1 core)
+            limits:
+              memory: "512Mi" # Mức RAM tối đa không được vượt quá (Tránh treo máy)
+              cpu: "500m"     # Mức CPU tối đa (50% của 1 core)
+          # Kiểm tra sức khỏe của ứng dụng (Health Check)
+          readinessProbe:
+            httpGet:
+              path: /identity/movies
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /identity/movies
+              port: 8081
+            initialDelaySeconds: 40
+            periodSeconds: 15

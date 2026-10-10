@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hb-cinema-service
+spec:
+  type: LoadBalancer # Cung cấp IP công khai để người dùng truy cập
+  selector:
+    app: hb-cinema-backend
+  ports:
+    - protocol: TCP
+      port: 80         # Port người dùng gõ trên web
+      targetPort: 8081 # Port thực tế của Backend
