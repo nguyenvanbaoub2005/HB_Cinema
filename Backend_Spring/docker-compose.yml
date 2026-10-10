@@ -3,7 +3,7 @@ services:
     image: booooo226a/hb_cinema_backend:latest
     container_name: Backend_Spring
     ports:
-      - "9091:8081"
+      - "80:8081"
     networks:
       - cinema_net
     environment:
