@@ -19,40 +19,46 @@ const BillVNPay = () => {
         vnp_PayDate: "20241212154313"
     });
 
-    useEffect(() => {
-        // Lấy các tham số từ URL
-        const params = new URLSearchParams(window.location.search);
-        const vnp_Amount = params.get('vnp_Amount');
-        const vnp_BankCode = params.get('vnp_BankCode');
-        const vnp_BankTranNo = params.get('vnp_BankTranNo');
-        const vnp_CardType = params.get('vnp_CardType');
-        const vnp_OrderInfo = params.get('vnp_OrderInfo');
-        const vnp_PayDate = params.get('vnp_PayDate');
-        const vnp_ResponseCode = params.get('vnp_ResponseCode');
-        const vnp_TmnCode = params.get('vnp_TmnCode');
-        const vnp_TransactionNo = params.get('vnp_TransactionNo');
-        const vnp_TransactionStatus = params.get('vnp_TransactionStatus');
-        const vnp_TxnRef = params.get('vnp_TxnRef');
-        const vnp_SecureHash = params.get('vnp_SecureHash');
+    const [ticketCreated, setTicketCreated] = useState(false);
 
-        // Kiểm tra kết quả thanh toán
-        if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00' && bookingData) {
-            // Thanh toán thành công, gửi thông tin về tab trước
-            const data = createTicket(bookingData);
-            // Cập nhật paymentInfo nếu thanh toán thành công
-            setPaymentInfo({
-                vnp_Amount: vnp_Amount,
-                vnp_BankCode: vnp_BankCode,
-                vnp_BankTranNo: vnp_BankTranNo,
-                vnp_CardType: vnp_CardType,
-                vnp_OrderInfo: vnp_OrderInfo,
-                vnp_PayDate: vnp_PayDate
-            });
-        } else {
-            // Thanh toán thất bại
-            console.log('Thanh toán thất bại');
-        }
-    }, [navigate]);
+    useEffect(() => {
+        const handlePaymentCallback = async () => {
+            // Lấy các tham số từ URL
+            const params = new URLSearchParams(window.location.search);
+            const vnp_Amount = params.get('vnp_Amount');
+            const vnp_BankCode = params.get('vnp_BankCode');
+            const vnp_BankTranNo = params.get('vnp_BankTranNo');
+            const vnp_CardType = params.get('vnp_CardType');
+            const vnp_OrderInfo = params.get('vnp_OrderInfo');
+            const vnp_PayDate = params.get('vnp_PayDate');
+            const vnp_ResponseCode = params.get('vnp_ResponseCode');
+            const vnp_TransactionStatus = params.get('vnp_TransactionStatus');
+
+            // Kiểm tra kết quả thanh toán
+            if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00' && bookingData) {
+                try {
+                    // Thanh toán thành công → tạo vé
+                    await createTicket(bookingData);
+                    setTicketCreated(true);
+                    // Cập nhật paymentInfo
+                    setPaymentInfo({
+                        vnp_Amount: vnp_Amount,
+                        vnp_BankCode: vnp_BankCode,
+                        vnp_BankTranNo: vnp_BankTranNo,
+                        vnp_CardType: vnp_CardType,
+                        vnp_OrderInfo: vnp_OrderInfo,
+                        vnp_PayDate: vnp_PayDate
+                    });
+                } catch (error) {
+                    console.error('Lỗi tạo vé:', error);
+                }
+            } else {
+                // Thanh toán thất bại
+                console.log('Thanh toán thất bại');
+            }
+        };
+        handlePaymentCallback();
+    }, []);
 
     // Chuyển đổi số tiền từ VNPay (đơn vị xu) sang đồng
     const formatAmount = (amount) => {
