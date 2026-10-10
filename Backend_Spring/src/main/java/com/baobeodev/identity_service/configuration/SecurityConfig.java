@@ -87,7 +87,12 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
       // Tạo cấu hình CORS
       CorsConfiguration corsConfiguration = new CorsConfiguration();
-      corsConfiguration.addAllowedOrigin("http://localhost:3000"); // Cho phép tất cả các origin
+      corsConfiguration.addAllowedOrigin("http://localhost:3000");
+      corsConfiguration.addAllowedOrigin("https://hb-cinema-web.pages.dev");
+      corsConfiguration.addAllowedOriginPattern("https://*.hb-cinema-web.pages.dev");
+      corsConfiguration.addAllowedOrigin("https://fil.id.vn");
+      corsConfiguration.addAllowedOriginPattern("https://*.fil.id.vn");
+      corsConfiguration.setAllowCredentials(true);
       corsConfiguration.addAllowedMethod("*"); // Cho phép tất cả các phương thức
       corsConfiguration.addAllowedHeader("*"); // Cho phép tất cả các tiêu đề
       // Tạo UrlBasedCorsConfigurationSource và đăng ký cấu hình CORS
