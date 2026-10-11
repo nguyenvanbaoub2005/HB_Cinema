@@ -92,11 +92,19 @@
 
 /* Card */
 .card {
-  padding: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   perspective: 1000px;
+  background: rgba(10, 12, 22, 0.6);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 65, 108, 0.3);
 }
 
 /* Movie Poster Wrapper */
@@ -205,30 +213,32 @@
 .card-title {
   display: flex;
   flex-direction: column;
-  padding: 14px 4px 6px;
-  gap: 6px;
+  padding: 12px 6px 8px;
+  gap: 4px;
   cursor: pointer;
 }
 
 .card-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #e2e8f0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f0f4ff;
   line-height: 1.4;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.01em;
 }
 
 .card-title:hover .card-name {
-  color: #ff416c;
+  color: #ff6b8a;
+  text-shadow: 0 0 12px rgba(255, 65, 108, 0.5);
 }
 
 .rating {
-  display: none; /* Hide bottom rating since we have top right badge */
+  display: none;
 }
 
 /* Carousel controls customization */
