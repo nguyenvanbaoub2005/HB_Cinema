@@ -112,7 +112,7 @@ const MovieSchedule = () => {
     <div className="container movie-schedule-container">
       <ModalComponent />
       {/* Date Selection */}
-      <div className="selection-row">
+      <div className="selection-row dates-row">
         {dates.map((date) => (
           <button
             key={date}
@@ -131,7 +131,7 @@ const MovieSchedule = () => {
       </div>
 
       {/* Branch Selection */}
-      <div className="selection-row">
+      <div className="selection-row branches-row">
         {branches.map((branch) => (
           <button
             key={branch}
@@ -146,7 +146,7 @@ const MovieSchedule = () => {
       </div>
 
       {/* Room Selection */}
-      <div className="selection-row">
+      <div className="selection-row rooms-row">
         {rooms.map((room) => (
           <button
             key={room}

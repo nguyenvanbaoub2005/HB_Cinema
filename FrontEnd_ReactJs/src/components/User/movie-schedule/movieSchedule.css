@@ -1,102 +1,210 @@
 .movie-schedule-container {
-    padding: 70px;
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-    border-radius: 8px;
-    
+  padding: 50px 70px;
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* ---- Hàng chọn (Ngày / Chi nhánh / Phòng) ---- */
+.selection-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 16px;
+}
+
+.selection-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Nút chọn chung ---- */
+.selection-button {
+  padding: 10px 15px;
+  border: 2px solid #fc6e43;
+  background-color: #fff;
+  color: #fc6e43;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.selection-button.selected {
+  border-color: #fa812f;
+  background-color: #fa812f;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(250, 129, 47, 0.35);
+}
+
+.selection-button:hover:not(.selected) {
+  border-color: #fa812f;
+  background-color: #fff5ee;
+}
+
+/* ---- Nút Ngày ---- */
+.date-button {
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---- Nút Chi nhánh ---- */
+.branch-button {
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.branch-button img {
+  max-width: 60px;
+  height: auto;
+}
+
+/* ---- Nút Phòng ---- */
+.room-button {
+  min-width: 85px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.room-button img {
+  max-width: 24px;
+  height: auto;
+}
+
+/* ---- Danh sách giờ chiếu ---- */
+.showtime-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-top: 4px;
+}
+
+.showtime-button {
+  padding: 8px;
+  min-width: 90px;
+  border: 2px solid #108ab1;
+  background-color: #fff;
+  color: #108ab1;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  font-size: 16px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.showtime-button:hover {
+  background-color: #e0f4fb;
+  transform: scale(1.04);
+  box-shadow: 0 2px 8px rgba(16, 138, 177, 0.25);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .movie-schedule-container {
+    padding: 30px 30px;
   }
-  
-  .selection-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
-    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 40px; 
-  }
-  /* Ẩn thanh cuộn cho Chrome, Safari */
-  .selection-row::-webkit-scrollbar {
-    display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .movie-schedule-container {
+    padding: 20px 12px;
   }
 
-  .selection-button {
-    padding: 10px 15px;
-    border: 2px solid #fc6e43;
-    background-color: #fff;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #fc6e43;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  
+  /* Ngày: hiện dạng lưới 3 cột trên mobile */
+  .selection-row.dates-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: unset;
+    overflow-x: unset;
+    gap: 8px;
+    padding-bottom: 14px;
   }
-  
-  .selection-button.selected {
-    position: relative;
-    border: 2px solid #fa812f;
-    border-radius: 4px;
-    background-color: #fa812f;
-    color: #fff;
-  }
-  .selection-button:hover {
-    border: 2px solid #fa812f;
-  }
-  
+
   .date-button {
-    width: 120px;
-    display: flex;
-    align-items: center;
-    padding: 10px 10px;
-    font-weight: 500;
+    min-width: unset;
+    width: 100%;
+    font-size: 12px;
+    padding: 8px 6px;
   }
-  
+
+  /* Chi nhánh / Phòng: cuộn ngang vẫn ok */
+  .selection-row.branches-row,
+  .selection-row.rooms-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
   .branch-button {
-    white-space: nowrap;
-    font-weight: bold;
+    font-size: 13px;
   }
 
   .branch-button img {
-    max-width: 70px;
-  }
-  
-  .room-button {
-    width: 85px;
-    white-space: nowrap;
-    font-weight: bold;
+    max-width: 45px;
   }
 
+  .room-button {
+    font-size: 13px;
+    min-width: 75px;
+  }
+
+  /* Giờ chiếu: lưới 4 cột trên mobile */
   .showtime-list {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-x: auto;
-    scrollbar-width: none; /* Ẩn thanh cuộn cho Firefox */
-    -ms-overflow-style: none; /* Ẩn thanh cuộn cho IE/Edge */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: unset;
+    overflow-x: unset;
+    gap: 8px;
   }
-  
+
   .showtime-button {
-    padding: 5px;
-    width: 90px;
-    border: 2px solid #108ab1;
-    background-color: #fff;
-    color: #108ab1;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    font-size: 16px;
-    font-weight: 500;
+    min-width: unset;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 4px;
   }
-  
-  .showtime-button:hover {
-    background-color: #f0f0f0;
-    transform: scale(1.02);
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  /* Ngày: 2 cột trên màn nhỏ */
+  .selection-row.dates-row {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  @media (max-width: 768px) {
-  
+
+  /* Giờ chiếu: 3 cột trên màn nhỏ */
+  .showtime-list {
+    grid-template-columns: repeat(3, 1fr);
   }
+
+  .showtime-button {
+    font-size: 13px;
+    padding: 8px 2px;
+  }
+}
