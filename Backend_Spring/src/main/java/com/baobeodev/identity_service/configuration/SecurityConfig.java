@@ -38,7 +38,8 @@ public class SecurityConfig {
     "/branch",
     "/seats",
     "seats/{seatID}",
-    "seats/schedule/{scheduleId}"
+    "seats/schedule/{scheduleId}",
+    "/health" // Endpoint kiểm tra server - không cần xác thực
   };
 
   @Bean
