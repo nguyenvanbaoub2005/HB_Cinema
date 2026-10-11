@@ -2,11 +2,27 @@
    MovieList - Premium Dark Glassmorphism
 ====================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
 .movie-list-section {
   padding: 50px 60px;
-  background: #0b0f19;
+  position: relative;
   font-family: 'Inter', sans-serif;
   color: #fff;
+  background-image: url('/src/assets/images/bg_login.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  isolation: isolate;
+}
+
+.movie-list-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 18, 0.82);
+  backdrop-filter: blur(2px);
+  z-index: -1;
 }
 
 /* Section Header */

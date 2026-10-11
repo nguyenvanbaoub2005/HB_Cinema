@@ -6,6 +6,7 @@ import "./movielist.css";
 import { FaStar } from "react-icons/fa";
 import { MovieContext } from "../../../context/MovieProvider";
 import { NavLink } from "react-router-dom";
+import bgImage from "../../../assets/images/bg_login.png";
 
 const responsive = {
   superLargeDesktop: {
@@ -42,7 +43,10 @@ const MovieList = ({ title, data, onMovieClick }) => {
   const { handleTrailer } = useContext(MovieContext);
 
   return (
-    <div className="movie-list-section">
+    <div
+      className="movie-list-section"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <div className="section-header">
         <h2 className="title">
           {title}
