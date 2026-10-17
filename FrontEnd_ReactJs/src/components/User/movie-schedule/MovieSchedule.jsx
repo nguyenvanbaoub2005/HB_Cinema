@@ -27,11 +27,17 @@ const MovieSchedule = () => {
       console.log(schedule);
 
       if (schedule.length > 0) {
-        // Đặt mặc định ngày, chi nhánh, phòng
-        const firstShow = schedule[0];
-        setSelectedDate(firstShow.startDateTime.split("T")[0]);
-        setSelectedBranch(firstShow.branchName);
-        setSelectedRoom(firstShow.room.name);
+        // Chỉ lấy các suất chiếu từ hôm nay trở về sau
+        const todayStr = new Date().toISOString().split("T")[0];
+        const futureShows = schedule.filter(
+          (show) => show.startDateTime.split("T")[0] >= todayStr
+        );
+        const firstShow = futureShows.length > 0 ? futureShows[0] : null;
+        if (firstShow) {
+          setSelectedDate(firstShow.startDateTime.split("T")[0]);
+          setSelectedBranch(firstShow.branchName);
+          setSelectedRoom(firstShow.room.name);
+        }
       }
     };
 
@@ -39,12 +45,16 @@ const MovieSchedule = () => {
   }, [id]);
 
   // Các giá trị tính toán dựa trên dữ liệu
-  const dates = useMemo(
-    () => [
-      ...new Set(movieSchedule.map((show) => show.startDateTime.split("T")[0])),
-    ],
-    [movieSchedule]
-  );
+  const dates = useMemo(() => {
+    const todayStr = new Date().toISOString().split("T")[0];
+    return [
+      ...new Set(
+        movieSchedule
+          .map((show) => show.startDateTime.split("T")[0])
+          .filter((date) => date >= todayStr)
+      ),
+    ];
+  }, [movieSchedule]);
 
   const branches = useMemo(
     () => [
