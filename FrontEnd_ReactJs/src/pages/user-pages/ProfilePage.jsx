@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getMyBill } from "../../api/apiBill";
 import { getTicketByBill } from "../../api/apiTicket";
 import MyBill from "../../components/User/my-bill/MyBill";
@@ -11,7 +11,6 @@ import Loading from "../../components/User/loading/Loading";
 import { useNotificationModal } from "../../components/User/notificationModal/NotificationModal";
 import ChangePassword from "../../components/Admin/modal-admin/ChangePassword";
 
-
 const ProfilePage = () => {
   const [bills, setBills] = useState([]); // Danh sách hóa đơn
   const [tickets, setTickets] = useState([]); // Danh sách vé theo hóa đơn
@@ -19,9 +18,11 @@ const ProfilePage = () => {
   const [myInfo, setMyInfo] = useState({});
   const [error, setError] = useState(null); // Trạng thái lỗi
   const [loading, setLoading] = useState(false); // Trạng thái tải dữ liệu
+  const [ticketLoading, setTicketLoading] = useState(false); // Trạng thái tải danh sách vé
   const [isModalChangePass, setIsModalChangePass] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Sử dụng hook thông báo
   const { openModal, ModalComponent } = useNotificationModal();
@@ -32,11 +33,19 @@ const ProfilePage = () => {
     fetchMyInfo();
   }, []);
 
+  // Tự động tải vé khi URL có dạng /profile/tickets/:id (kể cả khi F5 lại trang)
+  useEffect(() => {
+    const match = location.pathname.match(/\/tickets\/(\d+)/);
+    if (match && match[1]) {
+      fetchTicketsByBill(match[1]);
+    }
+  }, [location.pathname]);
+
   const fetchMyBill = async () => {
     setLoading(true); // Bắt đầu loading
     try {
       const data = await getMyBill();
-      setBills(data.result);
+      setBills(Array.isArray(data.result) ? data.result : []);
     } catch (err) {
       setError(err.message);
       openModal({ type: "error", title: "Error", message: err.message });
@@ -49,7 +58,7 @@ const ProfilePage = () => {
     setLoading(true);
     try {
       const data = await getMyInfo();
-      setMyInfo(data.result);
+      setMyInfo(data.result || {});
     } catch (error) {
       setError(error.message);
       openModal({ type: "error", title: "Lỗi", message: error.message });
@@ -59,21 +68,21 @@ const ProfilePage = () => {
   };
 
   const fetchTicketsByBill = async (billId) => {
-    setLoading(true);
+    setTicketLoading(true);
     try {
       const data = await getTicketByBill(billId);
-      setTickets(data.result);
+      setTickets(Array.isArray(data.result) ? data.result : []);
     } catch (err) {
       setError(err.message);
-      openModal({ type: "error", title: "Lỗi", message: err.message });
+      setTickets([]);
+      openModal({ type: "error", title: "Lỗi", message: err.message || "Không thể tải vé" });
     } finally {
-      setLoading(false);
+      setTicketLoading(false);
     }
   };
 
   const handleBillClick = (billId) => {
     setSelectedBillId(billId); // Đặt ID hóa đơn được chọn
-    fetchTicketsByBill(billId); // Lấy danh sách vé liên quan
     navigate(`/profile/tickets/${billId}`); // Điều hướng sang trang chi tiết vé
   };
 
@@ -176,7 +185,7 @@ const ProfilePage = () => {
 
           <Route
             path="/tickets/:id"
-            element={<MyTicket ticket={tickets} loading={loading} />}
+            element={<MyTicket ticket={tickets} loading={ticketLoading} />}
           />
         </Routes>
       </div>

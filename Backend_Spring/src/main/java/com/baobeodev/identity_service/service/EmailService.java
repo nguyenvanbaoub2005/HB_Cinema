@@ -17,12 +17,24 @@ public class EmailService {
 
   private final JavaMailSender mailSender;
 
+  @org.springframework.beans.factory.annotation.Value("${spring.mail.username:ptatamde@gmail.com}")
+  private String senderEmail;
+
   public void sendEmailWithQRCode(
       String to, String subject, String body, List<String> qrBase64Images)
       throws MessagingException {
-    MimeMessage message = mailSender.createMimeMessage();
-    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    if (to == null || to.trim().isEmpty()) {
+      throw new IllegalArgumentException("Địa chỉ email người nhận không được để trống");
+    }
 
+    MimeMessage message = mailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+    try {
+      helper.setFrom(senderEmail, "HB Cinema");
+    } catch (Exception e) {
+      helper.setFrom(senderEmail);
+    }
     helper.setTo(to);
     helper.setSubject(subject);
     helper.setText(body, true); // HTML format

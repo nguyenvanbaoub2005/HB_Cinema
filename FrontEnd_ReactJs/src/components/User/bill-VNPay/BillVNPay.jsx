@@ -2,61 +2,72 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Check, Home, Receipt, Ticket } from 'lucide-react';
 import { createTicket } from '../../../api/apiTicket';
-import { getBookingDataStorage } from '../../../api/dataBookingStorage';
-
+import { removeBookingDataStorage, getBookingDataStorage } from '../../../api/dataBookingStorage';
+import { AlertCircle, XCircle } from 'lucide-react';
 
 const BillVNPay = () => {
     const navigate = useNavigate();
     const bookingData = getBookingDataStorage();
 
-    const [bill, setBill] = useState([]);
+    const [status, setStatus] = useState('processing'); // 'processing', 'success', 'failed'
+    const [statusMessage, setStatusMessage] = useState('Đang xử lý kết quả thanh toán và chốt vé...');
     const [paymentInfo, setPaymentInfo] = useState({
-        vnp_Amount: 65000000,
-        vnp_BankCode: "NCB",
-        vnp_BankTranNo: "VNP14739207",
-        vnp_CardType: "ATM",
-        vnp_OrderInfo: "Thanh toan don hang:19473404",
-        vnp_PayDate: "20241212154313"
+        vnp_Amount: 0,
+        vnp_BankCode: "",
+        vnp_BankTranNo: "",
+        vnp_CardType: "",
+        vnp_OrderInfo: "",
+        vnp_PayDate: ""
     });
-
-    const [ticketCreated, setTicketCreated] = useState(false);
 
     useEffect(() => {
         const handlePaymentCallback = async () => {
-            // Lấy các tham số từ URL
             const params = new URLSearchParams(window.location.search);
-            const vnp_Amount = params.get('vnp_Amount');
-            const vnp_BankCode = params.get('vnp_BankCode');
-            const vnp_BankTranNo = params.get('vnp_BankTranNo');
-            const vnp_CardType = params.get('vnp_CardType');
-            const vnp_OrderInfo = params.get('vnp_OrderInfo');
-            const vnp_PayDate = params.get('vnp_PayDate');
+            const vnp_Amount = params.get('vnp_Amount') || '0';
+            const vnp_BankCode = params.get('vnp_BankCode') || 'NCB';
+            const vnp_BankTranNo = params.get('vnp_BankTranNo') || '';
+            const vnp_CardType = params.get('vnp_CardType') || 'ATM';
+            const vnp_OrderInfo = params.get('vnp_OrderInfo') || '';
+            const vnp_PayDate = params.get('vnp_PayDate') || '';
             const vnp_ResponseCode = params.get('vnp_ResponseCode');
             const vnp_TransactionStatus = params.get('vnp_TransactionStatus');
 
-            // Kiểm tra kết quả thanh toán
-            if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00' && bookingData) {
-                try {
-                    // Thanh toán thành công → tạo vé
-                    await createTicket(bookingData);
-                    setTicketCreated(true);
-                    // Cập nhật paymentInfo
-                    setPaymentInfo({
-                        vnp_Amount: vnp_Amount,
-                        vnp_BankCode: vnp_BankCode,
-                        vnp_BankTranNo: vnp_BankTranNo,
-                        vnp_CardType: vnp_CardType,
-                        vnp_OrderInfo: vnp_OrderInfo,
-                        vnp_PayDate: vnp_PayDate
-                    });
-                } catch (error) {
-                    console.error('Lỗi tạo vé:', error);
-                }
-            } else {
-                // Thanh toán thất bại
-                console.log('Thanh toán thất bại');
+            setPaymentInfo({
+                vnp_Amount,
+                vnp_BankCode,
+                vnp_BankTranNo,
+                vnp_CardType,
+                vnp_OrderInfo,
+                vnp_PayDate
+            });
+
+            // Kiểm tra kết quả từ VNPay
+            if (vnp_ResponseCode !== '00' || vnp_TransactionStatus !== '00') {
+                setStatus('failed');
+                setStatusMessage('Thanh toán VNPay không thành công hoặc đã bị hủy.');
+                return;
+            }
+
+            // Kiểm tra dữ liệu đặt vé trong localStorage
+            if (!bookingData) {
+                setStatus('failed');
+                setStatusMessage('Không tìm thấy thông tin đặt vé trong trình duyệt (bookingData trống). Hãy kiểm tra lại tên miền truy cập!');
+                return;
+            }
+
+            try {
+                // Thanh toán thành công → gọi API tạo vé và gửi email
+                await createTicket(bookingData);
+                removeBookingDataStorage(); // Dọn dẹp storage sau khi đã tạo vé thành công
+                setStatus('success');
+                setStatusMessage('Thanh toán thành công và vé đã được chốt!');
+            } catch (error) {
+                console.error('Lỗi tạo vé:', error);
+                setStatus('failed');
+                setStatusMessage(`Thanh toán tiền thành công nhưng lỗi khi chốt vé: ${error.message}`);
             }
         };
+
         handlePaymentCallback();
     }, []);
 
@@ -115,15 +126,30 @@ const BillVNPay = () => {
             <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
                 <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
                     <div className="flex flex-col items-center space-y-4">
-                        {/* Biểu tượng thanh toán thành công */}
-                        <div className="bg-green-500 text-white rounded-full p-4">
-                            <Check size={48} />
-                        </div>
+                        {/* Biểu tượng trạng thái */}
+                        {status === 'success' && (
+                            <div className="bg-green-500 text-white rounded-full p-4">
+                                <Check size={48} />
+                            </div>
+                        )}
+                        {status === 'failed' && (
+                            <div className="bg-red-500 text-white rounded-full p-4">
+                                <XCircle size={48} />
+                            </div>
+                        )}
+                        {status === 'processing' && (
+                            <div className="bg-blue-500 text-white rounded-full p-4 animate-spin">
+                                <AlertCircle size={48} />
+                            </div>
+                        )}
 
-                        {/* Tiêu đề */}
-                        <h2 className="text-2xl font-bold text-gray-800">
-                            Thanh toán thành công
+                        {/* Tiêu đề & Thông báo */}
+                        <h2 className="text-2xl font-bold text-gray-800 text-center">
+                            {status === 'success' ? 'Thanh toán thành công' : status === 'failed' ? 'Có lỗi xảy ra' : 'Đang xử lý đơn hàng...'}
                         </h2>
+                        <p className={`text-sm text-center px-2 ${status === 'success' ? 'text-green-600' : status === 'failed' ? 'text-red-500' : 'text-gray-500'}`}>
+                            {statusMessage}
+                        </p>
 
                         {/* Chi tiết giao dịch */}
                         <div className="w-full bg-gray-50 rounded-lg p-4 space-y-3">

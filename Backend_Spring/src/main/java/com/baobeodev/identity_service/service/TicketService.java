@@ -46,6 +46,7 @@ public class TicketService {
   BillMapper billMapper;
   ScheduleSeatService scheduleSeatService;
   EmailService emailService;
+  UserRepository userRepository;
 
   public List<TicketResponse> getAllTickets() {
     return ticketRepository.findAll().stream().map(ticketMapper::toTicketResponse).toList();
@@ -115,20 +116,25 @@ public class TicketService {
     double totalAmount = totalTicketPrice + totalComboPrice;
     // lấy meo từ JWT
     String userEmail = getEmailUser();
-    log.info("Send To " + userEmail);
-    try {
-      String emailSubject = "Thông tin vé xem phim của bạn";
-      String emailBody =
-          buildEmailBody(
-              ticketResponses,
-              totalTicketPrice,
-              combos,
-              totalComboPrice,
-              totalAmount,
-              qrImageUrls); // Tạo nội dung email
-      emailService.sendEmailWithQRCode(userEmail, emailSubject, emailBody, qrImageUrls);
-    } catch (Exception e) {
-      log.error("Lỗi khi gửi email (bỏ qua để tiếp tục luồng mua vé): ", e);
+    log.info("Bắt đầu xử lý gửi email vé xem phim tới: " + userEmail);
+    if (userEmail != null && !userEmail.isBlank()) {
+      try {
+        String emailSubject = "Thông tin vé xem phim của bạn";
+        String emailBody =
+            buildEmailBody(
+                ticketResponses,
+                totalTicketPrice,
+                combos,
+                totalComboPrice,
+                totalAmount,
+                qrImageUrls); // Tạo nội dung email
+        emailService.sendEmailWithQRCode(userEmail, emailSubject, emailBody, qrImageUrls);
+        log.info("Gửi email vé xem phim thành công tới: " + userEmail);
+      } catch (Exception e) {
+        log.error("Lỗi khi gửi email (bỏ qua để tiếp tục luồng mua vé): ", e);
+      }
+    } else {
+      log.warn("Bỏ qua gửi email vì không tìm thấy địa chỉ email của người dùng");
     }
     return TicketAggregateResponse.builder()
         .totalTickets(ticketResponses.size())
@@ -186,8 +192,8 @@ public class TicketService {
             .collect(Collectors.joining());
 
     String qrImages =
-        qrImageIds.stream()
-            .map(id -> "<img src='cid:" + id + "' style='margin: 10px; ' />")
+        java.util.stream.IntStream.range(0, qrImageIds.size())
+            .mapToObj(i -> "<img src='cid:qrImage_" + i + "' style='margin: 10px; width: 150px; height: 150px;' alt='QR Code' />")
             .collect(Collectors.joining());
 
     return "<div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>"
@@ -237,9 +243,17 @@ public class TicketService {
 
   public String getEmailUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Jwt jwt = (Jwt) authentication.getPrincipal();
-    String userEmail = jwt.getClaim("email");
-    return userEmail;
+    if (authentication != null && authentication.getPrincipal() instanceof Jwt jwt) {
+      String userEmail = jwt.getClaim("email");
+      if (userEmail != null && !userEmail.isBlank()) {
+        return userEmail;
+      }
+      String username = jwt.getClaim("sub");
+      if (username != null) {
+        return userRepository.findByUsername(username).map(User::getEmail).orElse(null);
+      }
+    }
+    return null;
   }
 
   public String getUsernameFromJwt() {
