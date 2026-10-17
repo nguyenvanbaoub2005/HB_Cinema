@@ -5,4 +5,6 @@ metadata:
 data:
   VNPAY_RETURN_URL: "http://localhost:3000/identity/payment/vn-pay-callback"
   VNPAY_TMN_CODE: "58X4B4HP"
+  MAIL_HOST: "smtp.gmail.com"
+  MAIL_PORT: "587"
   TZ: "Asia/Ho_Chi_Minh"

@@ -14,6 +14,10 @@ services:
       VNPAY_TMN_CODE: ${VNPAY_TMN_CODE:-58X4B4HP}
       VNPAY_SECRET_KEY: ${VNPAY_SECRET_KEY}
       VNPAY_RETURN_URL: ${VNPAY_RETURN_URL:-https://hb-cinema-web.pages.dev/identity/payment/vn-pay-callback}
+      MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
       TZ: Asia/Ho_Chi_Minh
 
 networks:
