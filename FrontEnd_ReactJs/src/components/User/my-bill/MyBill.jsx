@@ -11,10 +11,20 @@ const MyBill = ({ title, bills, onBillClick, loading }) => {
     return <div>No bill!</div>;
   }
 
+  // Sắp xếp bill mới nhất lên đầu (theo createdTime hoặc id giảm dần)
+  const sortedBills = [...bills].sort((a, b) => {
+    const timeA = a.createdTime ? new Date(a.createdTime).getTime() : 0;
+    const timeB = b.createdTime ? new Date(b.createdTime).getTime() : 0;
+    if (timeB !== timeA) {
+      return timeB - timeA;
+    }
+    return (b.id || 0) - (a.id || 0);
+  });
+
   return (
     <div className="bill-container">
       <h2 className="bill-title">{title}</h2>
-      {bills.map((bill) => {
+      {sortedBills.map((bill) => {
         const createdAt = bill.createdTime ? new Date(bill.createdTime) : null;
         const formattedDate = createdAt
           ? createdAt.toLocaleDateString("vi-VN", {

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Integer> {
-  List<Bill> findByUser_Username(String username);
+  List<Bill> findByUser_UsernameOrderByIdDesc(String username);
 
-  List<Bill> findByUser_Id(String Id);
+  List<Bill> findByUser_IdOrderByIdDesc(String Id);
+
+  List<Bill> findAllByOrderByIdDesc();
 }

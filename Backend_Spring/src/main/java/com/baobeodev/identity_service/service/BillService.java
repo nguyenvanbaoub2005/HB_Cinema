@@ -56,7 +56,7 @@ public class BillService {
         userRepository
             .findByUsername(username)
             .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-    List<Bill> bills = billRepository.findByUser_Username(username);
+    List<Bill> bills = billRepository.findByUser_UsernameOrderByIdDesc(username);
     log.info(" " + bills);
     return bills.stream().map(billMapper::toBillResponse).collect(Collectors.toList());
   }
@@ -67,14 +67,14 @@ public class BillService {
         userRepository
             .findById(idUser)
             .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-    List<Bill> bills = billRepository.findByUser_Id(idUser);
+    List<Bill> bills = billRepository.findByUser_IdOrderByIdDesc(idUser);
     return bills.stream().map(billMapper::toBillResponse).collect(Collectors.toList());
   }
 
   @PreAuthorize("hasRole('ADMIN')")
   public List<BillResponse> getBills() {
     log.info("In method get Bills");
-    return billRepository.findAll().stream().map(billMapper::toBillResponse).toList();
+    return billRepository.findAllByOrderByIdDesc().stream().map(billMapper::toBillResponse).toList();
   }
 
   @Transactional

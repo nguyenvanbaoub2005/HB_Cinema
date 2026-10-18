@@ -276,29 +276,20 @@ public class TicketService {
   }
 
   private String generateQRCodeText(Ticket ticket) {
-    // Lấy thông tin từ đối tượng Ticket
-    String startDateTime = ticket.getSchedule().getStartDateTime().toString(); // Thời gian bắt đầu
-    String movieTitle = ticket.getSchedule().getMovie().getTitle(); // Tên phim
-    String seatName = ticket.getSeat().getName(); // Tên ghế
-    String branchName = ticket.getSchedule().getBranch().getName(); // Tên chi nhánh
-    String roomName = ticket.getSchedule().getRoom().getName(); // Tên phòng
-    String timeBuyTicket = ticket.getBill().getCreatedTime().toString(); // ngày mua
-    return """
-        MOVIE: %s
-        START TIME: %s
-        BRANCH: %s
-        ROOM: %s
-        SEAT: %s
-        TIME CREATE: %s
-        """
-        .formatted(movieTitle, startDateTime, branchName, roomName, seatName, timeBuyTicket);
+    Integer billId = ticket.getBill() != null ? ticket.getBill().getId() : null;
+    if (billId != null) {
+      return "https://cinema.fil.id.vn/profile/tickets/" + billId;
+    }
+    return "https://cinema.fil.id.vn";
   }
 
   private String generateQRCodeImage(String text) {
     try {
       QRCodeWriter qrCodeWriter = new QRCodeWriter();
       Map<EncodeHintType, Object> hintMap = new HashMap<>();
-      hintMap.put(EncodeHintType.MARGIN, 1); // Tùy chỉnh
+      hintMap.put(EncodeHintType.MARGIN, 1);
+      hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+      hintMap.put(EncodeHintType.ERROR_CORRECTION, com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.M);
 
       // Tạo QR code với kích thước 250x250 px
       BufferedImage qrCodeImage =
