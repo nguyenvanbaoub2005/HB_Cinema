@@ -275,12 +275,32 @@ public class TicketService {
     return billMapper.toEntity(billResponse);
   }
 
+  private static final java.time.format.DateTimeFormatter TICKET_TIME_FORMATTER =
+      java.time.format.DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+
   private String generateQRCodeText(Ticket ticket) {
-    Integer billId = ticket.getBill() != null ? ticket.getBill().getId() : null;
-    if (billId != null) {
-      return "https://cinema.fil.id.vn/profile/tickets/" + billId;
+    String startDateTime = "";
+    if (ticket.getSchedule() != null && ticket.getSchedule().getStartDateTime() != null) {
+      startDateTime = ticket.getSchedule().getStartDateTime().format(TICKET_TIME_FORMATTER);
     }
-    return "https://cinema.fil.id.vn";
+    String movieTitle =
+        ticket.getSchedule() != null && ticket.getSchedule().getMovie() != null
+            ? ticket.getSchedule().getMovie().getTitle()
+            : "";
+    String seatName = ticket.getSeat() != null ? ticket.getSeat().getName() : "";
+    String branchName =
+        ticket.getSchedule() != null && ticket.getSchedule().getBranch() != null
+            ? ticket.getSchedule().getBranch().getName()
+            : "";
+    String roomName =
+        ticket.getSchedule() != null && ticket.getSchedule().getRoom() != null
+            ? ticket.getSchedule().getRoom().getName()
+            : "";
+    Integer billId = ticket.getBill() != null ? ticket.getBill().getId() : 0;
+
+    return String.format(
+        "PHIM: %s\nGHẾ: %s (%s - %s)\nSUẤT: %s | ĐƠN: #%04d",
+        movieTitle, seatName, roomName, branchName, startDateTime, billId);
   }
 
   private String generateQRCodeImage(String text) {
