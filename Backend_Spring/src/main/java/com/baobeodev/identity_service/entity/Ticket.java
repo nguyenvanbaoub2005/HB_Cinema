@@ -18,7 +18,7 @@ public class Ticket {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
-  @Column(name = "qr_imageurl", length = 5000)
+  @Column(name = "qr_imageurl", columnDefinition = "TEXT")
   String qrImageURL;
 
   @ManyToOne
